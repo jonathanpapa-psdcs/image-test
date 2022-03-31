@@ -1,4 +1,8 @@
 <h2>SeedSigner Independent Custody Guide</h2>
+
+<img width="677" alt="seedsigner_logo" src="https://user-images.githubusercontent.com/71993074/161100672-3a178567-8ebc-49fd-9ef6-3a3aeaf16b85.png">
+
+
 (Some Notes on Titling: I almost chose "The SeedSigner Manifesto" as a grab-your-attention title with a little bit of cheekiness baked in. As I think more and more about bitcoin custody and how it has evolved over time, the term "manifesto" seems increasingly appropriate to use for some of the ideas that underlie this guide. Manifestos commonly challenge conventional ways of thinking and can be threatening to incumbents and status quo beliefs.
 
 As I view the longer arc of bitcoin custody, I think of it in three epochs. The first is the epoch characterized by Bitcoin Core and paper wallets, Core being of course the earliest way to store bitcoin, and paper wallets being representative of early creative attempts at facilitating storage with improved security assurances.
