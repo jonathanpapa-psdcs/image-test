@@ -10,3 +10,4 @@ In my view, the third custody epoch is being ushered in by the PSBT (partially s
 This "manifesto" then seeks to advance the idea that with the right mix of design inputs, users can have access to simple, user-friendly bitcoin self-custody, with reasonably solid security assurances, using inexpensive, discreetly-acquired hardware, & FOSS code.)
 
 ![image2](https://user-images.githubusercontent.com/71993074/160119766-fbd021ba-22ea-4a8c-90de-a8aba7f4bf3f.jpeg)
+<img src="https://github.com/SeedSigner/independent_custody_guide/blob/main/images/seedsigner_logo.png" width="450">
