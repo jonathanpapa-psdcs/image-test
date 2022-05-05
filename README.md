@@ -1,17 +1,51 @@
 <h2>SeedSigner Independent Custody Guide</h2>
 
-<img width="677" alt="seedsigner_logo" src="https://user-images.githubusercontent.com/71993074/161100672-3a178567-8ebc-49fd-9ef6-3a3aeaf16b85.png">
-
-
-(Some Notes on Titling: I almost chose "The SeedSigner Manifesto" as a grab-your-attention title with a little bit of cheekiness baked in. As I think more and more about bitcoin custody and how it has evolved over time, the term "manifesto" seems increasingly appropriate to use for some of the ideas that underlie this guide. Manifestos commonly challenge conventional ways of thinking and can be threatening to incumbents and status quo beliefs.
-
-As I view the longer arc of bitcoin custody, I think of it in three epochs. The first is the epoch characterized by Bitcoin Core and paper wallets, Core being of course the earliest way to store bitcoin, and paper wallets being representative of early creative attempts at facilitating storage with improved security assurances.
-
-I consider the second epoch to be the hardware wallet era; that is, the era of proprietary, USB-connected, secure element equipped, separate hardware devices that represented a big advance in bitcoin custodial security assurances, but with significant compromises, some of which involve varying degrees of reliance on third parties. The second epoch was facilitated by the hierarchical deterministic wallet and the BIP39 seed phrase standards.
-
-In my view, the third custody epoch is being ushered in by the PSBT (partially signed bitcoin transaction) standard, the implementation and refinement of multi-signature wallet standards, and the ongoing re-thinking of how we can increase the separation between devices/software that interact with the bitcoin protocol, and devices/software that interact with private keys. I believe that stateless signing devices (like SeedSigner) which leverage transparently airgapped communication (read QR-exchange protocol rather than NFC), with a focus on facilitating user-accessible multi-signature wallet use, will emerge as emblematic of this third epoch. The DIY approach of SeedSigner, leveraging general purpose hardware and Free-And-Open-Source code, will also serve to shift control away from purveyors of purpose-built, proprietary hardware wallets, moving that power back into the hands of users.
-
-This "manifesto" then seeks to advance the idea that with the right mix of design inputs, users can have access to simple, user-friendly bitcoin self-custody, with reasonably solid security assurances, using inexpensive, discreetly-acquired hardware, & FOSS code.)
-
-![image2](https://user-images.githubusercontent.com/71993074/160119766-fbd021ba-22ea-4a8c-90de-a8aba7f4bf3f.jpeg)
 <img src="https://github.com/SeedSigner/independent_custody_guide/blob/main/images/seedsigner_logo.png" width="450">
+
+## Quick Links (if you want to skip ahead):
+
+* [Introduction](#introduction)
+* [Why Multi-signature Wallets?](#why-multi-signature-wallets)
+* [What's the story with this SeedSigner thing anyway? (Ideation / Evolution)](#whats-the-story-with-this-seedsigner-thing-anyway)
+* [Alright, but there's got to be a catch, right? (Concerns / Considerations)](#alright-but-theres-got-to-be-a-catch-right)
+* [So what does this SeedSigner thing actually do? (Core Functionality)](#so-what-does-this-seedsigner-thing-actually-do)
+* [How can I get my hands on a SeedSigner to try it out? (Sourcing / Building)](#alright-alright-this-all-sounds-pretty-cool-how-can-i-get-my-hands-on-a-seedsigner-to-try-it-out)
+* [Testnet is the best way to, well, test...](#testnet-is-the-best-way-to-well-test)
+* [Wallet Set-up and Spend Walkthrough!](#can-we-get-started-with-the-actual-guide-already)
+* [Final Variables to Consider](#variables-to-consider)
+
+
+## Introduction
+
+Most bitcoiners understand the importance of self-custody within the the larger bitcoin ecosystem -- as a digital bearer asset, being able to have personal custody of your coins is a huge part of the ethos of bitcoin (not your keys...not your coins). And holding one's own private keys is not merely some kind of bitcoiner virtue signaling exercise, but actually serves several important functions:
+
+- Protects bitcoin owners from loss of funds due to custodial service thefts or rugpulls
+- Allows users to send bitcoin to any recipient without the need for permission **from anyone**
+- Foundational to privacy-conscious bitcoin usage
+- Protects bitcoin as a financial asset from rehypothication & other forms of value dilution
+- Helps bitcoin users understand the network's technical fundamentals (when done properly)
+
+
+<h2 id="why-multi-signature-wallets">Why Multi-signature Wallets?</h2>
+
+Multi-signature wallets have gotten a bad reputation. Several years ago when the core concept of "multi-signature" storage started to gain traction in the bitcoin ecosystem, the hype and value proposition were real but it it took a fair amount of time for proper tools to be developed. And like most tools, the earliest versions necessarily targeted a more-technical audience, and by the time those tools had emerged the larger hype around multi-signature wallets had died down. This progression of events has seemingly resulted in multi-signature bitcoin storage being perceived as a more niche self-custody option only suited to sufficiently-technical individuals.
+
+One of the primary goals of this guide is to shatter and discard the notion that multi-signature wallets are too complex for most, if not all, bitcoiners -- full stop. If a given multi-signature wallet seems too complex and is practically too difficult for most bitcoiners to use, that is the fault of the wallet's creators, who need to proverbially "return to the drawing board".
+
+The most approachable way I've found for many people to think about multi-signature storage is to consider a multi-signature wallet as a kind of corporate board (sometimes referred to in technical-speak as a "quorum"). Your funds are the board's treasury, and those funds can only be accessed or moved with the approval of a certain number of board members (sometimes referred to as "co-signers"). Usually the number of co-signers required to access funds constitutes a majority of the total signers (think 3-of-5) but the chartering documents that are laid out when the board was created (sometimes referred to as the "multisig policy") dictate how many votes are needed to access funds. (Note that a board that only required one member to be able to approve the movement of funds wouldn't make a lot of sense, and in most scenarios a board that required every member to approve transactions would be difficult to manage.)
+
+Like most analogies, this one breaks down as you get deeper into the technical details, but it still serves as a good starting point for most people. But now with a general idea of how multi-signature wallets work, what are the advantages & disadvantages?
+
+<h2 id="why-multi-signature-wallets">Alright, But There's Got to Be a Catch, Right?</h2>
+
+No technology, especially security-related technologies, are **ALL** positive, there have to be trade-offs or vulnerabilities. What follows is a list of the criticisms/vulnerabilities of SeedSigner of which I am aware; I will also briefly provide my perspective on each of them
+
+<h2 id="why-multi-signature-wallets">So What Does This SeedSigner Thing Actually Do?</h2>
+
+Generally speaking, SeedSigner helps bitcoiners accomplish three important independent custody tasks:
+
+- Creating secure private keys in a trust-minimized way
+- Generating extended public keys used during initial wallet configuration
+- Securely signing transactions via animated QR code sets
+
+Each one of these tasks deserves some elaboration, so here we go...
